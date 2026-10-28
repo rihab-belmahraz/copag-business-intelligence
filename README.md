@@ -1,4 +1,4 @@
-# COPAG — Business Intelligence & Commercial Performance Analysis
+
 
 ## 📌 Project Overview
 
