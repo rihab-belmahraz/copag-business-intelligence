@@ -1,12 +1,12 @@
 
 
-## 📌 Project Overview
+##  Project Overview
 
 This project focuses on designing and implementing a **Business Intelligence (BI) solution** to centralize, process, and analyze commercial data, enabling better performance monitoring and data-driven decision-making.
 
 The solution follows a business intelligence architecture that integrates a Data Lake, a Data Warehouse, ETL processes, an analytical layer, and interactive Power BI dashboards.
 
-## 🎯 Project Objectives
+##  Project Objectives
 
 - Centralize data from operational systems.
 - Design a Data Warehouse for multidimensional analysis.
@@ -15,7 +15,7 @@ The solution follows a business intelligence architecture that integrates a Data
 - Monitor sales performance and key performance indicators (KPIs).
 - Present analytical insights through Power BI dashboards.
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 The solution is organized into the following components:
 
@@ -25,7 +25,7 @@ The solution is organized into the following components:
 4. **Multidimensional Analysis (SSAS)** — Provides an analytical layer for exploring business data.
 5. **Data Visualization (Power BI)** — Presents key indicators through interactive dashboards.
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Technology | Purpose |
 |---|---|
@@ -81,7 +81,7 @@ copag-business-intelligence/
 
 *The detailed contents depend on the files included in each project directory.*
 
-## 🎓 Skills Demonstrated
+##  Skills Demonstrated
 
 - Business Intelligence
 - Data Engineering and Data Integration
