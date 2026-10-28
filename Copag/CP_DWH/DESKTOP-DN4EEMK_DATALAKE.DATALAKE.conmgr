@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-DN4EEMK_DATALAKE.DATALAKE"
+  DTS:DTSID="{5A0222F1-7173-4015-8131-E4D55D0F4622}"
+  DTS:CreationName="ADO">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DESKTOP-DN4EEMK\DATALAKE;Initial Catalog=DATALAKE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-CP_DWH-{5A0222F1-7173-4015-8131-E4D55D0F4622}DESKTOP-DN4EEMK\DATALAKE.DATALAKE;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

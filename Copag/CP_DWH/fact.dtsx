@@ -1,0 +1,1501 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2026 11:51:24 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DN4EEMK"
+  DTS:CreatorName="DESKTOP-DN4EEMK\hp"
+  DTS:DTSID="{96E7E1D2-45B9-4BFC-8D38-D467DCA57998}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="fact"
+  DTS:PackageType="5"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{BB014741-973E-4C4A-851C-F1B9D4A49627}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DATALAKE.DATALAKE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9D51D4D5-1A02-4A47-85A7-F31C51FEF872}"
+      DTS:ObjectName="DESKTOP-DN4EEMK\DATALAKE.DATALAKE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-DN4EEMK\DATALAKE;Initial Catalog=DATALAKE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-fact-{9D51D4D5-1A02-4A47-85A7-F31C51FEF872}DESKTOP-DN4EEMK\DATALAKE.DATALAKE;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0CF07F43-C5AA-416C-8AC3-F8C23D674711}"
+      DTS:ObjectName="DESKTOP-DN4EEMK\DWH.DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-DN4EEMK\DWH;Initial Catalog=DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-fact-{0CF07F43-C5AA-416C-8AC3-F8C23D674711}DESKTOP-DN4EEMK\DWH.DW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Conteneur de séquences"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Conteneur de séquences"
+      DTS:DTSID="{7B196110-DAB2-4E88-9046-DC37316B7E32}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Conteneur de séquences">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Conteneur de séquences\Tâche d'exécution de requêtes SQL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tâche d'exécution de requêtes SQL"
+          DTS:DTSID="{DC4DAA43-7A70-4468-A868-00B92E2E039C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tâche d'exécution de requêtes SQL"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0CF07F43-C5AA-416C-8AC3-F8C23D674711}"
+              SQLTask:SqlStatementSource="truncate table dbo.VENTE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Conteneur de séquences\Tâche de flux de données"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tâche de flux de données"
+          DTS:DTSID="{C21FC44D-5854-438D-8D6B-96CA685AD254}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tâche de flux de données"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Conversion de données;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;0"
+                  description="Conversion de données"
+                  name="Conversion de données"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]"
+                      name="Entrée de conversion de données">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données].Columns[DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DATE"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[DATE]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données]"
+                      exclusionGroup="1"
+                      name="Sortie de conversion de données"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Fix_DATE]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Fix_DATE]"
+                          name="Fix_DATE"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Spécifie la colonne d'entrée utilisée comme source de données pour la conversion."
+                              name="SourceInputColumnLineageID">#{Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[DATE]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indique si la colonne utilise les routines d'analyse les plus rapides, avec des paramètres régionaux neutres."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de conversion de données"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie d'erreur de conversion de données].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destination OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+                  description="Destination OLE DB"
+                  name="Destination OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset">[VENTE]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                      errorOrTruncationOperation="Insérer"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrée de destination OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[CODE_CHARGEMENT]"
+                          cachedDataType="i8"
+                          cachedName="CODE_CHARGEMENT"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[CODE_CHARGEMENT]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_CHARGEMENT]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[QTE_CHARGEE]"
+                          cachedDataType="i4"
+                          cachedName="QTE_CHARGEE"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[QTE_CHARGEE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[QTE_CHARGEE]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[TOTAL_CHARGEE]"
+                          cachedDataType="i4"
+                          cachedName="TOTAL_CHARGEE"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_CHARGEE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_CHARGEE]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[TOTAL_VENDU]"
+                          cachedDataType="i4"
+                          cachedName="TOTAL_VENDU"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_VENDU]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_VENDU]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[TOTAL_INVENDU]"
+                          cachedDataType="i4"
+                          cachedName="TOTAL_INVENDU"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_INVENDU]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_INVENDU]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[TOTAL_RENDUS]"
+                          cachedDataType="i4"
+                          cachedName="TOTAL_RENDUS"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_RENDUS]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_RENDUS]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[PERTE]"
+                          cachedDataType="i4"
+                          cachedName="PERTE"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PERTE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PERTE]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[PRIX_VNT]"
+                          cachedDataType="cy"
+                          cachedName="PRIX_VNT"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PRIX_VNT]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PRIX_VNT]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[ARTICLE_KEY]"
+                          cachedDataType="i4"
+                          cachedName="ARTICLE_KEY"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[ARTICLE_KEY]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche avec correspondance].Columns[ARTICLE_KEY]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[SECTEUR_KEY]"
+                          cachedDataType="i4"
+                          cachedName="SECTEUR_KEY"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[SECTEUR_KEY]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche avec correspondance].Columns[SECTEUR_KEY]" />
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].Columns[DATE_KEY]"
+                          cachedDataType="i4"
+                          cachedName="DATE_KEY"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[DATE_KEY]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche avec correspondance].Columns[DATE_KEY]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[ARTICLE_KEY]"
+                          dataType="i4"
+                          name="ARTICLE_KEY" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[SECTEUR_KEY]"
+                          dataType="i4"
+                          name="SECTEUR_KEY" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[CODE_CHARGEMENT]"
+                          dataType="i8"
+                          name="CODE_CHARGEMENT" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[QTE_CHARGEE]"
+                          dataType="i4"
+                          name="QTE_CHARGEE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_CHARGEE]"
+                          dataType="i4"
+                          name="TOTAL_CHARGEE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_VENDU]"
+                          dataType="i4"
+                          name="TOTAL_VENDU" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_INVENDU]"
+                          dataType="i4"
+                          name="TOTAL_INVENDU" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[TOTAL_RENDUS]"
+                          dataType="i4"
+                          name="TOTAL_RENDUS" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PERTE]"
+                          dataType="i4"
+                          name="PERTE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[PRIX_VNT]"
+                          dataType="cy"
+                          name="PRIX_VNT" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[DATE_KEY]"
+                          dataType="i4"
+                          name="DATE_KEY" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB].ExternalColumns[DATE_KEY_DWH]"
+                          dataType="i4"
+                          name="DATE_KEY_DWH" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de destination OLE DB"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Outputs[Sortie d'erreur de destination OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Recherche;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;6"
+                  description="Joint des colonnes supplémentaires au flux de données en recherchant des valeurs dans une table. Par exemple, joignez la colonne 'id employé' à la table des employés afin d'obtenir la 'date d'embauche' et le 'nom de l'employé'. Nous recommandons cette transformation lorsque la table de recherche peut être stockée en mémoire."
+                  name="Recherche"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie l'instruction SQL qui génère la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DIM_ARTICLE]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie une instruction SQL qui utilise des paramètres pour générer la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DIM_ARTICLE]) [refTable]
+where [refTable].[CODE_ARTICLE] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de connexion utilisé pour accéder au dataset de référence."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de cache de la table de correspondance."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie comment la transformation de recherche gère les lignes sans entrées correspondantes dans le jeu de données de référence."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le pourcentage du cache alloué aux lignes sans entrées correspondantes dans le dataset de référence."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 32 bits."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 64 bits."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indique si les métadonnées sont à référencer en format XML."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ARTICLE_KEY" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CODE_ARTICLE" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NOM_ARTICLE" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PRODUIT_KEY" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Spécifie la liste d'identificateurs de traçabilité se mappant aux paramètres utilisés dans la propriété SQLCommand par l'instruction SQL. Les entrées dans la liste sont séparées par des points-virgules."
+                      name="ParameterMap">#{Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_ARTICLE]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Détermine si les clés dupliquées dans les données de référence doivent être traitées en tant qu'erreurs lorsque le mode Cache complet est utilisé."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      description="Gestionnaire de connexions utilisé pour accéder aux données de correspondance."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche]"
+                      name="Entrée de recherche">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche].Columns[CODE_ARTICLE]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CODE_ARTICLE"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_ARTICLE]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence sur laquelle une colonne se lie."
+                              name="JoinToReferenceColumn">CODE_ARTICLE</property>
+                            <property
+                              dataType="System.Null"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche avec correspondance]"
+                      errorOrTruncationOperation="Recherche"
+                      errorRowDisposition="IgnoreFailure"
+                      exclusionGroup="1"
+                      name="Sortie de recherche avec correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche avec correspondance].Columns[ARTICLE_KEY]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copie de colonnes"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche avec correspondance].Columns[ARTICLE_KEY]"
+                          name="ARTICLE_KEY"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn">ARTICLE_KEY</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche sans correspondance]"
+                      description="Sortie de recherche gérant les lignes sans entrées correspondantes dans le dataset de référence. Utilisez cette sortie lorsque la propriété NoMatchBehavior a la valeur « Envoyez les lignes sans entrées correspondantes dans la sortie sans correspondance »."
+                      exclusionGroup="1"
+                      name="Sortie de recherche sans correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie d'erreur de recherche]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de recherche"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Recherche;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;6"
+                  description="Joint des colonnes supplémentaires au flux de données en recherchant des valeurs dans une table. Par exemple, joignez la colonne 'id employé' à la table des employés afin d'obtenir la 'date d'embauche' et le 'nom de l'employé'. Nous recommandons cette transformation lorsque la table de recherche peut être stockée en mémoire."
+                  name="Recherche 1"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie l'instruction SQL qui génère la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DIM_SECTEUR]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie une instruction SQL qui utilise des paramètres pour générer la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DIM_SECTEUR]) [refTable]
+where [refTable].[CODE_SECTEUR] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de connexion utilisé pour accéder au dataset de référence."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de cache de la table de correspondance."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie comment la transformation de recherche gère les lignes sans entrées correspondantes dans le jeu de données de référence."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le pourcentage du cache alloué aux lignes sans entrées correspondantes dans le dataset de référence."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 32 bits."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 64 bits."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indique si les métadonnées sont à référencer en format XML."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SECTEUR_KEY" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CODE_SECTEUR" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NOM_SECTEUR" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="BLOC_KEY" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Spécifie la liste d'identificateurs de traçabilité se mappant aux paramètres utilisés dans la propriété SQLCommand par l'instruction SQL. Les entrées dans la liste sont séparées par des points-virgules."
+                      name="ParameterMap">#{Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_SECTEUR]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Détermine si les clés dupliquées dans les données de référence doivent être traitées en tant qu'erreurs lorsque le mode Cache complet est utilisé."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      description="Gestionnaire de connexions utilisé pour accéder aux données de correspondance."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche]"
+                      name="Entrée de recherche">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche].Columns[CODE_SECTEUR]"
+                          cachedDataType="i4"
+                          cachedName="CODE_SECTEUR"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_SECTEUR]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence sur laquelle une colonne se lie."
+                              name="JoinToReferenceColumn">CODE_SECTEUR</property>
+                            <property
+                              dataType="System.Null"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche avec correspondance]"
+                      errorOrTruncationOperation="Recherche"
+                      errorRowDisposition="IgnoreFailure"
+                      exclusionGroup="1"
+                      name="Sortie de recherche avec correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche avec correspondance].Columns[SECTEUR_KEY]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copie de colonnes"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche avec correspondance].Columns[SECTEUR_KEY]"
+                          name="SECTEUR_KEY"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn">SECTEUR_KEY</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche sans correspondance]"
+                      description="Sortie de recherche gérant les lignes sans entrées correspondantes dans le dataset de référence. Utilisez cette sortie lorsque la propriété NoMatchBehavior a la valeur « Envoyez les lignes sans entrées correspondantes dans la sortie sans correspondance »."
+                      exclusionGroup="1"
+                      name="Sortie de recherche sans correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie d'erreur de recherche]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de recherche"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Recherche;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;6"
+                  description="Joint des colonnes supplémentaires au flux de données en recherchant des valeurs dans une table. Par exemple, joignez la colonne 'id employé' à la table des employés afin d'obtenir la 'date d'embauche' et le 'nom de l'employé'. Nous recommandons cette transformation lorsque la table de recherche peut être stockée en mémoire."
+                  name="Recherche 2"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie l'instruction SQL qui génère la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DIM_DATE]</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie une instruction SQL qui utilise des paramètres pour générer la table de correspondance."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DIM_DATE]) [refTable]
+where [refTable].[PK_Date] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de connexion utilisé pour accéder au dataset de référence."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le type de cache de la table de correspondance."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie comment la transformation de recherche gère les lignes sans entrées correspondantes dans le jeu de données de référence."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le pourcentage du cache alloué aux lignes sans entrées correspondantes dans le dataset de référence."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 32 bits."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Utilisation maximale de la mémoire pour le cache de référence sur une plateforme 64 bits."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indique si les métadonnées sont à référencer en format XML."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DATE_KEY" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PK_Date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Année_Fiscale" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Année_Fiscale_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semestre_Fiscal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semestre_Fiscal_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quadrimestre_Fiscal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quadrimestre_Fiscal_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semaine_Fiscale" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semaine_Fiscale_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Semestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Semestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Quadrimestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Quadrimestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Trimestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Trimestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Mois" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_Du_Mois_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_De_La_Semaine" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Jour_Fiscal_De_La_Semaine_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semaine_Fiscale_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semaine_Fiscale_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Semestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Semestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Quadrimestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Quadrimestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Trimestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Mois_Fiscal_Du_Trimestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quadrimestre_Fiscal_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quadrimestre_Fiscal_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal_Du_Semestre" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Trimestre_Fiscal_Du_Semestre_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semestre_Fiscal_De_lannée" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Semestre_Fiscal_De_lannée_Nom" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Spécifie la liste d'identificateurs de traçabilité se mappant aux paramètres utilisés dans la propriété SQLCommand par l'instruction SQL. Les entrées dans la liste sont séparées par des points-virgules."
+                      name="ParameterMap">#{Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Fix_DATE]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Détermine si les clés dupliquées dans les données de référence doivent être traitées en tant qu'erreurs lorsque le mode Cache complet est utilisé."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DWH.DW]"
+                      description="Gestionnaire de connexions utilisé pour accéder aux données de correspondance."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche]"
+                      name="Entrée de recherche">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche].Columns[Fix_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="Fix_DATE"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données].Columns[Fix_DATE]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence sur laquelle une colonne se lie."
+                              name="JoinToReferenceColumn">PK_Date</property>
+                            <property
+                              dataType="System.Null"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche avec correspondance]"
+                      errorOrTruncationOperation="Recherche"
+                      errorRowDisposition="IgnoreFailure"
+                      exclusionGroup="1"
+                      name="Sortie de recherche avec correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche avec correspondance].Columns[DATE_KEY]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copie de colonnes"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche avec correspondance].Columns[DATE_KEY]"
+                          name="DATE_KEY"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Spécifie la colonne de la table de référence à partir de laquelle une colonne est copiée."
+                              name="CopyFromReferenceColumn">DATE_KEY</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche sans correspondance]"
+                      description="Sortie de recherche gérant les lignes sans entrées correspondantes dans le dataset de référence. Utilisez cette sortie lorsque la propriété NoMatchBehavior a la valeur « Envoyez les lignes sans entrées correspondantes dans la sortie sans correspondance »."
+                      exclusionGroup="1"
+                      name="Sortie de recherche sans correspondance"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie d'erreur de recherche]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de recherche"
+                      synchronousInputId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie d'erreur de recherche].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie d'erreur de recherche].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Source OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;7"
+                  description="Source OLE DB"
+                  name="Source OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Commande SQL à exécuter."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    TPC.CODE_ARTICLE,
+    TC.CODE_SECTEUR,
+    TC.DATE_CHARGEMENT AS DATE,
+    TC.CODE_CHARGEMENT,
+
+    SUM(TPC.QTE_CHARGEE) AS QTE_CHARGEE,
+    SUM(TPC.TOTAL_CHARGEE) AS TOTAL_CHARGEE,
+    SUM(TPC.TOTAL_VENDU) AS TOTAL_VENDU,
+    SUM(TPC.TOTAL_INVENDU_POINTE) AS TOTAL_INVENDU,
+    SUM(TPC.TOTAL_RENDUS_POINTE) AS TOTAL_RENDUS,
+
+    SUM(TPC.TOTAL_INVENDU_POINTE) + SUM(TPC.TOTAL_RENDUS_POINTE) AS PERTE,
+
+    MAX(TPC.PRIX_VNT) AS PRIX_VNT
+
+FROM dbo.T_CHARGEMENT TC
+INNER JOIN dbo.T_PRODUITS_CHARGEE TPC
+    ON TC.CODE_CHARGEMENT = TPC.CODE_CHARGEMENT
+
+GROUP BY
+    TPC.CODE_ARTICLE,
+    TC.CODE_SECTEUR,
+    TC.DATE_CHARGEMENT,
+    TC.CODE_CHARGEMENT</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable contenant la commande SQL à exécuter."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie la page de codes de la colonne à utiliser lorsque les informations de page de codes ne sont pas disponibles à partir de la source de données."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Force l'utilisation de la valeur de propriété DefaultCodePage lors de la description des données caractères."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le mode utilisé pour accéder à la base de données."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Mappages entre les paramètres de la commande SQL et les variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-DN4EEMK\DATALAKE.DATALAKE]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DN4EEMK\DATALAKE.DATALAKE]"
+                      description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB]"
+                      name="Sortie de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_ARTICLE]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_ARTICLE]"
+                          length="255"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_ARTICLE]"
+                          name="CODE_ARTICLE"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_SECTEUR]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_SECTEUR]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_SECTEUR]"
+                          name="CODE_SECTEUR"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_CHARGEMENT]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_CHARGEMENT]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[CODE_CHARGEMENT]"
+                          name="CODE_CHARGEMENT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[QTE_CHARGEE]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[QTE_CHARGEE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[QTE_CHARGEE]"
+                          name="QTE_CHARGEE"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_CHARGEE]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_CHARGEE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_CHARGEE]"
+                          name="TOTAL_CHARGEE"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_VENDU]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_VENDU]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_VENDU]"
+                          name="TOTAL_VENDU"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_INVENDU]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_INVENDU]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_INVENDU]"
+                          name="TOTAL_INVENDU"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_RENDUS]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_RENDUS]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[TOTAL_RENDUS]"
+                          name="TOTAL_RENDUS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PERTE]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[PERTE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PERTE]"
+                          name="PERTE"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PRIX_VNT]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[PRIX_VNT]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[PRIX_VNT]"
+                          name="PRIX_VNT"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[DATE]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[DATE]"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].Columns[DATE]"
+                          name="DATE"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_ARTICLE]"
+                          dataType="wstr"
+                          length="255"
+                          name="CODE_ARTICLE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_SECTEUR]"
+                          dataType="i4"
+                          name="CODE_SECTEUR" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[CODE_CHARGEMENT]"
+                          dataType="i8"
+                          name="CODE_CHARGEMENT" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[QTE_CHARGEE]"
+                          dataType="i4"
+                          name="QTE_CHARGEE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_CHARGEE]"
+                          dataType="i4"
+                          name="TOTAL_CHARGEE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_VENDU]"
+                          dataType="i4"
+                          name="TOTAL_VENDU" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_INVENDU]"
+                          dataType="i4"
+                          name="TOTAL_INVENDU" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[TOTAL_RENDUS]"
+                          dataType="i4"
+                          name="TOTAL_RENDUS" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[PERTE]"
+                          dataType="i4"
+                          name="PERTE" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[PRIX_VNT]"
+                          dataType="cy"
+                          name="PRIX_VNT" />
+                        <externalMetadataColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB].ExternalColumns[DATE]"
+                          dataType="dbTimeStamp"
+                          name="DATE" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB]"
+                      isErrorOut="true"
+                      name="Sortie d'erreur de source OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_ARTICLE]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_ARTICLE]"
+                          name="CODE_ARTICLE" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_SECTEUR]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_SECTEUR]"
+                          name="CODE_SECTEUR" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[DATE]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[DATE]"
+                          name="DATE" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_CHARGEMENT]"
+                          dataType="i8"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[CODE_CHARGEMENT]"
+                          name="CODE_CHARGEMENT" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[QTE_CHARGEE]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[QTE_CHARGEE]"
+                          name="QTE_CHARGEE" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_CHARGEE]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_CHARGEE]"
+                          name="TOTAL_CHARGEE" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_VENDU]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_VENDU]"
+                          name="TOTAL_VENDU" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_INVENDU]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_INVENDU]"
+                          name="TOTAL_INVENDU" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_RENDUS]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[TOTAL_RENDUS]"
+                          name="TOTAL_RENDUS" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[PERTE]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[PERTE]"
+                          name="PERTE" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[PRIX_VNT]"
+                          dataType="cy"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[PRIX_VNT]"
+                          name="PRIX_VNT" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie d'erreur de source OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de conversion de données]"
+                  endId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Inputs[Entrée de recherche]"
+                  name="Sortie de conversion de données"
+                  startId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Outputs[Sortie de conversion de données]" />
+                <path
+                  refId="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance]"
+                  endId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Inputs[Entrée de recherche]"
+                  name="Sortie de recherche avec correspondance"
+                  startId="Package\Conteneur de séquences\Tâche de flux de données\Recherche.Outputs[Sortie de recherche avec correspondance]" />
+                <path
+                  refId="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance1]"
+                  endId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Inputs[Entrée de recherche]"
+                  name="Sortie de recherche avec correspondance"
+                  startId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1.Outputs[Sortie de recherche avec correspondance]" />
+                <path
+                  refId="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance2]"
+                  endId="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB.Inputs[Entrée de destination OLE DB]"
+                  name="Sortie de recherche avec correspondance"
+                  startId="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2.Outputs[Sortie de recherche avec correspondance]" />
+                <path
+                  refId="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+                  endId="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données.Inputs[Entrée de conversion de données]"
+                  name="Sortie de source OLE DB"
+                  startId="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB.Outputs[Sortie de source OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Conteneur de séquences.PrecedenceConstraints[Contrainte]"
+          DTS:CreationName=""
+          DTS:DTSID="{2F3FB900-A81C-4C82-9442-AA15B477395E}"
+          DTS:From="Package\Conteneur de séquences\Tâche d'exécution de requêtes SQL"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Contrainte"
+          DTS:To="Package\Conteneur de séquences\Tâche de flux de données" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<Objects
+  Version="8">
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données"
+          TopLeft="28,107.5" />
+        <NodeLayout
+          Size="245,42"
+          Id="Package\Conteneur de séquences\Tâche d'exécution de requêtes SQL"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Conteneur de séquences.PrecedenceConstraints[Contrainte]"
+          TopLeft="128,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256,205"
+          Size="256,248"
+          Id="Package\Conteneur de séquences"
+          TopLeft="5.50000000000003,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2"
+          TopLeft="29.5000000000001,413.5" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB"
+          TopLeft="11.5000000000001,515.5" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1"
+          TopLeft="29.5,311.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB"
+          TopLeft="21.5,5.5" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Conversion de données"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Conteneur de séquences\Tâche de flux de données\Recherche"
+          TopLeft="34,209.5" />
+        <EdgeLayout
+          Id="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de source OLE DB]"
+          TopLeft="100,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance2]"
+          TopLeft="100,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.67701171875,20.4453125,183.3540234375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance1]"
+          TopLeft="100,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.67701171875,20.4453125,183.3540234375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de recherche avec correspondance]"
+          TopLeft="100,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.67701171875,20.4453125,183.3540234375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conteneur de séquences\Tâche de flux de données.Paths[Sortie de conversion de données]"
+          TopLeft="100,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données\Recherche 2">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DIM_DATE]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données\Destination OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données\Recherche 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DIM_SECTEUR]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données\Source OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conteneur de séquences\Tâche de flux de données\Recherche">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DIM_ARTICLE]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

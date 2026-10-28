@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DATALAKE"
+  DTS:DTSID="{9E10A2C1-380F-4E13-ADEB-D78647FA93E1}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DESKTOP-DN4EEMK\DATALAKE;Initial Catalog=DATALAKE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-CP_DT_INI_LOAD-{9E10A2C1-380F-4E13-ADEB-D78647FA93E1}DESKTOP-DN4EEMK\DATALAKE.DATALAKE;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

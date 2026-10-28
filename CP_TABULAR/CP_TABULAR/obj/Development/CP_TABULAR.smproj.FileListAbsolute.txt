@@ -1,0 +1,8 @@
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\bin\Model.asdatabase
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\bin\Model.deploymenttargets
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\bin\Model.deploymentoptions
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\obj\Development\CP_TABULAR.smproj.AssemblyReference.cache
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\obj\Development\CP_TABULAR.smproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\obj\Development\Model.asdatabase
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\obj\Development\Model.deploymentoptions
+C:\Users\hp\source\repos\CP_TABULAR\CP_TABULAR\obj\Development\Model.deploymenttargets

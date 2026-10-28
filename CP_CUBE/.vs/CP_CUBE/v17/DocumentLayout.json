@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DIM ARTICLE.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|solutionrelative:CP_CUBE\\DIM ARTICLE.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\cube_ventes.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|solutionrelative:CP_CUBE\\cube_ventes.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DW.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{553A46B5-2045-6F01-58A4-5FAE43567B4A}|CP_CUBE\\CP_CUBE.dwproj|solutionrelative:CP_CUBE\\DW.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DIM ARTICLE.dim [Conception]",
+              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DIM ARTICLE.dim",
+              "RelativeDocumentMoniker": "CP_CUBE\\DIM ARTICLE.dim",
+              "ToolTip": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DIM ARTICLE.dim [Conception]",
+              "RelativeToolTip": "CP_CUBE\\DIM ARTICLE.dim [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-15T10:48:28.714Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "cube_ventes.cube [Conception]",
+              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\cube_ventes.cube",
+              "RelativeDocumentMoniker": "CP_CUBE\\cube_ventes.cube",
+              "ToolTip": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\cube_ventes.cube [Conception]",
+              "RelativeToolTip": "CP_CUBE\\cube_ventes.cube [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-12T15:28:58.367Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DW.dsv [Conception]",
+              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DW.dsv",
+              "RelativeDocumentMoniker": "CP_CUBE\\DW.dsv",
+              "ToolTip": "C:\\Users\\hp\\source\\repos\\CP_CUBE\\CP_CUBE\\DW.dsv [Conception]",
+              "RelativeToolTip": "CP_CUBE\\DW.dsv [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-12T15:21:56.103Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
